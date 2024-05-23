@@ -110,6 +110,57 @@ void linearRegression(Performance performances[], int num_performances, float *s
     *intercept = (sum_y - (*slope) * sum_x) / num_performances; // stock the result in *intercept
 }
 
+void enterAthleteData(Athlete *athlete) {
+    char filename[100];
+    FILE *file;
+    printf("---------------------------------CREATE YOUR ATHLETE--------------------------------- \n");
+    while (1) {
+        printf("Enter athlete's name: ");
+        scanf("%s", athlete->name);
+
+        printf("Enter athlete's surname: ");
+        scanf("%s", athlete->surname);
+
+        // Vérification de l'existence du fichier
+        sprintf(filename, "%s_%s.txt", athlete->name, athlete->surname);
+        file = fopen(filename, "r");
+        if (file != NULL) {
+            printf("Error: An athlete with the name '%s %s' already exists.\n", athlete->name, athlete->surname);
+            fclose(file);
+        } else {
+            break; // Le fichier n'existe pas, on peut continuer
+        }
+    }
+
+    while (1) {
+        printf("Enter athlete's age: ");
+        scanf("%d", &athlete->age);
+        if (athlete->age >= 18) {
+            break;
+        } else {
+            printf("Error: Athlete must be at least 18 years old.\n");
+        }
+    }
+
+    printf("Enter athlete's weight: ");
+    scanf("%d", &athlete->weight);
+
+    while (1) {
+        printf("Enter athlete's gender (Male/Female): ");
+        scanf("%s", athlete->gender);
+        if (strcmp(athlete->gender, "Male") == 0 || strcmp(athlete->gender, "Female") == 0) {
+            break;
+        } else {
+            printf("Error: Gender must be either 'Male' or 'Female'.\n");
+        }
+    }
+
+    printf("Enter athlete's performance type: ");
+    scanf("%s", athlete->performance_type);
+
+    athlete->num_training = 0; // Initialize number of trainings to 0
+}
+
 // FUNCTION to CREATE FILE 
 void createAthleteFile(Athlete athlete) {
     FILE *file;
@@ -144,23 +195,21 @@ void readAthleteFile(char *filename) {
     }
 }
 
-// FUNCTION to ADD TRAINING IN A FILE
-void addRelayTraining(Athlete *athlete) {
-    RelayTraining new_relay_training;
+Athlete loadExistingAthlete(Athlete *athlete) {
     
-    do {
-        // Input the training date
-        printf("Enter training date (YYYY-MM-DD): ");
-        scanf("%s", new_relay_training.date);
-    } while (!isValidDateFormat(new_relay_training.date));
+    printf("Enter athlete's name: ");
+    scanf("%s", athlete->name);
 
-    // Check if a relay training already exists for the same date
-    for (int i = 0; i < athlete->num_training; ++i) {
-        if (athlete->trainings[i].event_type == EVENT_RELAY && strcmp(athlete->trainings[i].date, new_relay_training.date) == 0) {
-            printf("Error: A relay training already exists for %s.\n", new_relay_training.date);
-            return; // Exit the function without adding the new relay training
-        }
-    }
+    printf("Enter athlete's surname: ");
+    scanf("%s", athlete->surname);
+    
+}
+
+void addRelayTraining(Athlete *athlete, const char *training_date) {
+    RelayTraining new_relay_training;
+
+    // Copy the training date from addTraining
+    strcpy(new_relay_training.date, training_date);
 
     // Input split time and position for each participant
     for (int i = 0; i < MAX_PARTICIPANTS; ++i) {
@@ -169,6 +218,13 @@ void addRelayTraining(Athlete *athlete) {
         printf("Enter position for participant %d: ", i + 1);
         scanf("%d", &(new_relay_training.position[i]));
     }
+
+    // Ask the user for their position in the relay
+    int user_position;
+    do {
+        printf("Enter your position in the relay (1 to %d): ", MAX_PARTICIPANTS);
+        scanf("%d", &user_position);
+    } while (user_position < 1 || user_position > MAX_PARTICIPANTS);
 
     // Add the relay training to athlete's file
     FILE *file;
@@ -192,8 +248,9 @@ void addRelayTraining(Athlete *athlete) {
     }
 }
 
-// FUNCTION to ADD TRAINING
+
 void addTraining(Athlete *athlete) {
+    printf("\n---------------------------------LET'S ADD YOUR TRAINING !---------------------------------\n");
     Training new_training;
     do {
         // Input the training date
@@ -224,7 +281,7 @@ void addTraining(Athlete *athlete) {
             new_training.event_type = EVENT_MARATHON;
             break;
         case 4:
-            addRelayTraining(athlete); // Redirect to addRelayTraining function
+            addRelayTraining(athlete, new_training.date); // Pass the date to addRelayTraining
             return; // Return after adding relay training
         default:
             printf("Invalid choice. Defaulting to 100m.\n");
@@ -253,7 +310,6 @@ void addTraining(Athlete *athlete) {
     }
 }
 
-
 // FUNCTION to READ ATHLETE TRAINING HISTORY
 void readAthleteTrainingHistory(char *filename) {
     FILE *file;
@@ -261,7 +317,7 @@ void readAthleteTrainingHistory(char *filename) {
     int trainingInfoStarted = 0; // Flag to indicate when training information starts
     file = fopen(filename, "r"); // Open the file in read mode
     if (file != NULL) {
-        printf("Training history of the athlete:\n");
+        printf("---------------------------------TRAINING HISTORY OF THE ATHLETE---------------------------------\n");
         while (fgets(line, sizeof(line), file) != NULL) {
             // Check if the line contains the start of training information
             if (strstr(line, "Date:") != NULL) {
@@ -292,7 +348,7 @@ void readAthleteRelayTrainingHistory(char *filename) {
     char date[50];
     file = fopen(filename, "r"); // Open the file in read mode
     if (file != NULL) {
-        printf("Relay training history of the athlete:\n");
+        printf("---------------------------------RELAY TRAINING HISTORY OF THE ATHLETE---------------------------------\n");
         while (fgets(line, sizeof(line), file) != NULL) {
             // Check if the line contains relay training data
             if (strstr(line, "Event Type: 4") != NULL) { // Event Type 4 corresponds to Relay
@@ -306,13 +362,22 @@ void readAthleteRelayTrainingHistory(char *filename) {
 }
 
 // FUNCTION to READ ATHLETE TRAINING HISTORY BY DATE
-void readAthleteTrainingHistoryByDate(char *filename, char *searchDate) {
+void readAthleteTrainingHistoryByDate(char *filename) {
+    char searchDate[50];
+    printf("Enter the date to search for training history (YYYY-MM-DD): ");
+    scanf("%s", searchDate);
+    
+    if (!isValidDateFormat(searchDate)) {
+        printf("Error: Invalid date format.\n");
+        return;
+    }
+
     FILE *file;
     char line[1000];
     int trainingInfoStarted = 0; // Flag to indicate when training information starts
     file = fopen(filename, "r"); // Open the file in read mode
     if (file != NULL) {
-        printf("Training history of the athlete for date %s:\n", searchDate);
+        printf("---------------------------------TRAINING HISTORY OF THE ATHLETE FOR DATE %s---------------------------------\n", searchDate);
         while (fgets(line, sizeof(line), file) != NULL) {
             // Check if the line contains the start of training information
             if (strstr(line, "Date:") != NULL) {
@@ -336,7 +401,7 @@ void readAthleteRelayTrainingHistoryByDate(char *filename, char *searchDate) {
     char date[50];
     file = fopen(filename, "r"); // Open the file in read mode
     if (file != NULL) {
-        printf("Relay training history of the athlete for date %s:\n", searchDate);
+        printf("---------------------------------RELAY TRAINING HISTORY OF THE ATHLETE FOR DATE %s---------------------------------\n", searchDate);
         while (fgets(line, sizeof(line), file) != NULL) {
             // Check if the line contains relay training data and the search date
             if (strstr(line, "Event Type: 4") != NULL && strstr(line, searchDate) != NULL) { // Event Type 4 corresponds to Relay
@@ -436,7 +501,7 @@ void findTopAthletesForEvent(Athlete *athletes, int num_athletes, EventType even
     }
 
     // Print the top three athletes
-    printf("Top three athletes for ");
+    printf("---------------------------------TOP THREE ATHLETES FOR ");
     switch (event_type) { // we search all cases 
         case EVENT_100M:
             printf("100m:\n");
@@ -507,26 +572,44 @@ void athleteProgression(Athlete athlete, char *start_date, char *end_date, Event
 // MAIN
 int main() {
     // Initialize some athletes
-    Athlete athlete1 = {"Neymar", "Junior", 25, 75, "Male", "Sprinter", {}, 0};
-    Athlete athlete2 = {"Cristiano", "Ronaldo", 30, 60, "Female", "Long Distance Runner", {}, 0};
-    Athlete athlete3 = {"Leo", "Messi", 30, 60, "Female", "Long Distance Runner", {}, 0};
-   
+    Athlete athlete1;
+    Athlete athlete2;
+    Athlete athlete3;
+    enterAthleteData(&athlete1);
+    enterAthleteData(&athlete2);
+    enterAthleteData(&athlete3);
+
+    int number;
+    printf("Do you want to find back a file of an athlete ? YES : 1 \n");
+    scanf("%d",&number);
+    if(number == 1){
+        Athlete athlete4 = loadExistingAthlete(&athlete4);
+        addTraining(&athlete4);
+    }
+    
+
+    char athlete1_filename[100];
+    sprintf(athlete1_filename, "%s_%s.txt", athlete1.name, athlete1.surname);
+    char athlete2_filename[100];
+    sprintf(athlete2_filename, "%s_%s.txt", athlete2.name, athlete2.surname);
+    char athlete3_filename[100];
+    sprintf(athlete3_filename, "%s_%s.txt", athlete3.name, athlete3.surname);
+
 
     // Add training records for athletes
-    addTraining(&athlete1);
     addTraining(&athlete1);
     addTraining(&athlete2);
     
     
     
     // Display athlete files
-    readAthleteFile("Cristiano_Ronaldo.txt");
+    readAthleteFile(athlete2_filename);
     
     
     
 
-    // Display training history for a specific date
-    readAthleteTrainingHistoryByDate("Cristiano_Ronaldo.txt", "2024-05-07");
+    // Display training history for athlete4 for a specific date
+    readAthleteTrainingHistoryByDate(athlete2_filename);
     
     
 
@@ -540,7 +623,7 @@ int main() {
     
 
     // Display athlete progression between two dates
-    athleteProgression(athlete1, "2024-05-05", "2024-05-07", EVENT_100M);
+    athleteProgression(athlete2, "2024-05-05", "2024-05-07", EVENT_100M);
 
     // exemple of a tab named "performances" thanks to structure "Performance"
     Performance performances[] = {
