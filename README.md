@@ -22,10 +22,10 @@ Etape 1 | Cloner le Dépôt: Clonez ce dépôt sur votre machine locale en utili
 git clone https://github.com/chady12/suivi-performance-athletique.git
 
 Etape 2 | Compiler le Programme: Compilez le programme en utilisant votre compilateur C préféré. Par exemple :
-gcc main.c -o suivi_performance
+gcc -o main main.c
 
 Etape 3 | Exécuter le Programme: Exécutez le programme compilé :
-./suivi_performance
+./main
 
 Etape 4 | Suivre les Instructions à l'Écran: Utilisez l'interface interactive du programme pour gérer les athlètes, enregistrer les séances d'entraînement et analyser les données de performance.
 
