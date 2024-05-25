@@ -41,6 +41,29 @@ Etape 4 | Suivre les Instructions à l'Écran: Utilisez l'interface interactive 
 
 - Analyse de la Performance: Les utilisateurs peuvent analyser la performance des athlètes grâce à diverses fonctionnalités, notamment des résumés de performance, des classements des meilleurs athlètes et des analyses de progression.
 
+**INCLUDE**
+
+1. `#include <stdio.h>` : Cette structure permet au programme d'utiliser des fonctions d'entrée et de sortie comme `printf` et `scanf`.
+2. `#include <stdlib.h>` : Cette structure permet au programme d'utiliser des fonctions d'allocation de mémoire comme `malloc` et `free`.
+3. `#include <string.h>` : Cette structure permet au programme d'utiliser des fonctions de manipulation de chaînes de caractères comme `strcpy` et `strcmp`.
+4. `#include <float.h>` : Cette structure fournit des constantes liées aux calculs en virgule flottante, comme `FLT_MAX`.
+5. `#include <stdbool.h>` : Cette structure fournit le type de données booléen et les constantes `true` et `false`.
+6. `#include <ctype.h>` : Cette structure fournit des fonctions pour manipuler les caractères, comme `isdigit` et `isalpha`.
+7. `#include <math.h>` : Cette structure fournit des fonctions mathématiques comme `sin`, `cos` et `sqrt`.
+
+Ces structures sont couramment utilisées dans les programmes en C pour inclure les bibliothèques et fonctions nécessaires pour diverses fonctionnalités. Dans l'extrait de code donné, elles sont utilisées pour activer des fonctionnalités spécifiques telles que la manipulation de fichiers, la manipulation de chaînes, les opérations booléennes et les calculs mathématiques.
+
+**STRUCTURES CREES**
+1. EventType : Énumération des différents types d'événements auxquels un athlète peut participer. Le but de cette structure est de définir différents types d'événements tels que la course de 100 mètres, la course de 400 mètres, la course de 5000 mètres, la course de marathon et la course de relais.
+
+2. Training : Structure pour enregistrer les informations d'entraînement d'un athlète. Le but de cette structure est de stocker les détails d'une séance d'entraînement comprenant la date, le type d'événement et le temps réalisé par l'athlète.
+
+3. Athlete : Structure pour représenter les informations personnelles et d'entraînement d'un athlète. Le but de cette structure est de contenir des informations sur un athlète telles que le nom, le prénom, l'âge, le poids, le sexe, le type de performance, les séances d'entraînement et le nombre de séances d'entraînement enregistrées.
+
+4. RelayTraining : Structure pour gérer les séances d'entraînement de relais séparément. Le but de cette structure est de stocker les détails d'une séance d'entraînement de relais comprenant la date, les temps intermédiaires pour chaque participant au relais et les positions de chaque participant.
+
+5. Performance : Structure pour enregistrer les données de performance d'un athlète. Le but de cette structure est de stocker des données de performance telles que la date et la mesure de la performance (par exemple, le temps, la distance) pour un athlète.
+
 **EXPLICATION DU PROGRAMME**
 1. `isValidDateFormat(const char *date)`
    - Fonction pour valider le format de date (AAAA-MM-JJ).
@@ -120,6 +143,8 @@ Etape 4 | Suivre les Instructions à l'Écran: Utilisez l'interface interactive 
     - Fonction principale où les données de l'athlète, les entraînements, les analyses et les opérations sur les fichiers sont effectuées.
     - Entrée : Aucune
     - Sortie : `entier` (statut de retour)
+
+**ABSENCE DE FICHIERS .h CAR EN CLASSE VOUS NOUS AVIEZ DIT QUE POUR NOTRE PROGRAMME CELA N'ETAIT PAS NECESSAIRE**
 
 **CONTRIBUTEUR**
 
