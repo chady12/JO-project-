@@ -21,6 +21,10 @@ Analyse de régression linéaire pour prédire les tendances de performance futu
 Etape 1 | Cloner le Dépôt: Clonez ce dépôt sur votre machine locale en utilisant :
 git clone https://github.com/chady12/suivi-performance-athletique.git
 
+**OU**
+
+Télécharger le fichier main.c et suivre les prochaines étapes sur le terminale (**PLUS SIMPLE**)
+
 Etape 2 | Compiler le Programme: Compilez le programme en utilisant votre compilateur C préféré. Par exemple :
 gcc -o main main.c
 
