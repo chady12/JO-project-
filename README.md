@@ -148,7 +148,8 @@ Ces structures sont couramment utilisées dans les programmes en C pour inclure 
 **INFORMATIONS IMPORTANTES SUPPLEMENTAIRES**
 
 -   Absence de fichiers headers .h car en classe vous nous aviez dit que cela n'etais pas necessaire pour notre programme
--   Pour la fonction `findTopAthletesForEvent(Athlete *athletes, int num_athletes, EventType event_type)` : on essaye la fonction avec `athlete1`,`athlete2` et `athlete3` uniquement pour l'exemple, on ne peut donc pas integrer d'autre athletes de nos fichiers mais seulement ceux du programme lors de l'execution 
+-   Pour la fonction `findTopAthletesForEvent(Athlete *athletes, int num_athletes, EventType event_type)` : on essaye la fonction avec `athlete1`,`athlete2` et `athlete3` uniquement pour l'exemple, on ne peut donc pas integrer d'autre athletes de nos fichiers mais seulement ceux du programme lors de l'execution
+-   le tableau `performances` est composé d'elements qui servent uniquement d'**exemples** , donc les données de ce tableau ont été saisi aléatoirement afin de tester la fonction `void linearRegression(Performance performances[], int num_performances, float *slope, float *intercept)`
 
 **CONTRIBUTEUR**
 
