@@ -54,15 +54,15 @@ Etape 4 | Suivre les Instructions à l'Écran: Utilisez l'interface interactive 
 Ces structures sont couramment utilisées dans les programmes en C pour inclure les bibliothèques et fonctions nécessaires pour diverses fonctionnalités. Dans l'extrait de code donné, elles sont utilisées pour activer des fonctionnalités spécifiques telles que la manipulation de fichiers, la manipulation de chaînes, les opérations booléennes et les calculs mathématiques.
 
 **STRUCTURES CREES**
-1. EventType : Énumération des différents types d'événements auxquels un athlète peut participer. Le but de cette structure est de définir différents types d'événements tels que la course de 100 mètres, la course de 400 mètres, la course de 5000 mètres, la course de marathon et la course de relais.
+1. `EventType` : Énumération des différents types d'événements auxquels un athlète peut participer. Le but de cette structure est de définir différents types d'événements tels que la course de 100 mètres, la course de 400 mètres, la course de 5000 mètres, la course de marathon et la course de relais.
 
-2. Training : Structure pour enregistrer les informations d'entraînement d'un athlète. Le but de cette structure est de stocker les détails d'une séance d'entraînement comprenant la date, le type d'événement et le temps réalisé par l'athlète.
+2. `Training` : Structure pour enregistrer les informations d'entraînement d'un athlète. Le but de cette structure est de stocker les détails d'une séance d'entraînement comprenant la date, le type d'événement et le temps réalisé par l'athlète.
 
-3. Athlete : Structure pour représenter les informations personnelles et d'entraînement d'un athlète. Le but de cette structure est de contenir des informations sur un athlète telles que le nom, le prénom, l'âge, le poids, le sexe, le type de performance, les séances d'entraînement et le nombre de séances d'entraînement enregistrées.
+3. `Athlete` : Structure pour représenter les informations personnelles et d'entraînement d'un athlète. Le but de cette structure est de contenir des informations sur un athlète telles que le nom, le prénom, l'âge, le poids, le sexe, le type de performance, les séances d'entraînement et le nombre de séances d'entraînement enregistrées.
 
-4. RelayTraining : Structure pour gérer les séances d'entraînement de relais séparément. Le but de cette structure est de stocker les détails d'une séance d'entraînement de relais comprenant la date, les temps intermédiaires pour chaque participant au relais et les positions de chaque participant.
+4. `RelayTraining` : Structure pour gérer les séances d'entraînement de relais séparément. Le but de cette structure est de stocker les détails d'une séance d'entraînement de relais comprenant la date, les temps intermédiaires pour chaque participant au relais et les positions de chaque participant.
 
-5. Performance : Structure pour enregistrer les données de performance d'un athlète. Le but de cette structure est de stocker des données de performance telles que la date et la mesure de la performance (par exemple, le temps, la distance) pour un athlète.
+5. `Performance` : Structure pour enregistrer les données de performance d'un athlète. Le but de cette structure est de stocker des données de performance telles que la date et la mesure de la performance (par exemple, le temps, la distance) pour un athlète.
 
 **EXPLICATION DU PROGRAMME**
 1. `isValidDateFormat(const char *date)`
@@ -144,8 +144,12 @@ Ces structures sont couramment utilisées dans les programmes en C pour inclure 
     - Entrée : Aucune
     - Sortie : `entier` (statut de retour)
 
-**ABSENCE DE FICHIERS .h CAR EN CLASSE VOUS NOUS AVIEZ DIT QUE POUR NOTRE PROGRAMME CELA N'ETAIT PAS NECESSAIRE**
 
+**INFORMATIONS IMPORTANTES SUPPLEMENTAIRES**
+
+-   Absence de fichiers headers .h car en classe vous nous aviez dit que cela n'etais pas necessaire pour notre programme
+-   Pour la fonction `findTopAthletesForEvent(Athlete *athletes, int num_athletes, EventType event_type)` : on essaye la fonction avec 'athlete1','athlete2' et 'athlete3' uniquement pour l'exemple, on ne peut donc pas integrer d'autre athletes de nos fichiers mais seulement ceux du programme lors de l'execution 
+'
 **CONTRIBUTEUR**
 
 - ZAAROUR Chady
