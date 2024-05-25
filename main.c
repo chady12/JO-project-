@@ -734,15 +734,63 @@ int main() {
     for (int i = 0; i < num_trainings; ++i) {
         addTraining(&athlete3);
     }
-    
+
+    int choice;
+
     // Display athlete file
-    readAthleteFile(athlete2_filename);
+
+    printf("athlete 1, do you want to READ the FILE or not ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        readAthleteFile(athlete1_filename);
+    }
+    printf("athlete 2, do you want to READ the FILE or not ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        readAthleteFile(athlete2_filename);
+    }
+    printf("athlete 3, do you want to READ the FILE or not ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        readAthleteFile(athlete3_filename);
+    }
+
     
     // Display training history for athlete2 for a specific date
-    readAthleteTrainingHistoryByDate(athlete2_filename);
+    printf("athlete 1, do you want to search a training by a DATE or not ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        readAthleteTrainingHistoryByDate(athlete1_filename);
+    }
+    printf("athlete 2, do you want to search a training by a DATE or not ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        readAthleteTrainingHistoryByDate(athlete2_filename);
+    }
+    printf("athlete 3, do you want to search a training by a DATE or not ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        readAthleteTrainingHistoryByDate(athlete3_filename);
+    }
     
     // Display performance summary for athletes
-    athletePerformanceSummary(athlete1, EVENT_100M);
+    printf("athlete 1, do you want to read SUMMARY performances ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        athletePerformanceSummary(athlete1, EVENT_100M);
+    }
+
+    printf("athlete 2, do you want to read SUMMARY performances ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        athletePerformanceSummary(athlete2, EVENT_100M);
+    }
+    printf("athlete 3, do you want to read SUMMARY performances ? YES : 1 | NO : 2 \n");
+    scanf("%d",&choice);
+    if(choice == 1){
+        athletePerformanceSummary(athlete3, EVENT_100M);
+    }
+    
     
     // Find top athletes for specific events
     // example with 3 athletes
