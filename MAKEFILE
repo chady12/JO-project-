@@ -1,0 +1,23 @@
+# Makefile for GitHub project
+
+# Compiler
+CC = gcc
+
+# Compiler flags
+CFLAGS = -Wall -Wextra -Werror
+
+# Executable name
+EXEC = main
+
+# Source files
+SRC = main.c
+
+all: $(EXEC)
+
+$(EXEC): $(SRC)
+	$(CC) $(CFLAGS) -o $@ $^
+
+.PHONY: clean
+
+clean:
+	rm -f $(EXEC)
