@@ -158,11 +158,11 @@ void enterAthleteData(Athlete *athlete) {
     while (1) {
         printf("Enter athlete's age: ");
         scanf("%d", &athlete->age); // Read athlete's age
-        if (athlete->age >= 18) {
+        if (athlete->age >= 18 && athlete->age <= 40) {
             break; // Age is valid, break out of the loop
         } else {
             // Age is not valid, print an error message
-            printf("Error: Athlete must be at least 18 years old.\n");
+            printf("Error: Athlete must be at least 18 years old or less than 40 years old\n");
         }
     }
 
