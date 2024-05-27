@@ -474,7 +474,7 @@ void readAthleteTrainingHistoryByDate(char *filename) {
     // Open the file in read mode
     file = fopen(filename, "r");
     if (file != NULL) {
-        printf("---------------------------------TRAINING HISTORY OF THE ATHLETE FOR DATE %s---------------------------------\n", searchDate);
+        printf("---------------------------------TRAINING HISTORY OF THE ATHLETE FOR DATE %s\n", searchDate);
         // Iterate through each line of the file
         while (fgets(line, sizeof(line), file) != NULL) {
             // Check if the line contains the start of training information
