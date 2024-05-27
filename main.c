@@ -500,7 +500,7 @@ void readAthleteRelayTrainingHistoryByDate(char *filename, char *searchDate) {
     // Open the file in read mode
     file = fopen(filename, "r");
     if (file != NULL) {
-        printf("---------------------------------RELAY TRAINING HISTORY OF THE ATHLETE FOR DATE %s---------------------------------\n", searchDate);
+        printf("---------------------------------RELAY TRAINING HISTORY OF THE ATHLETE FOR DATE %s\n", searchDate);
         // Iterate through each line of the file
         while (fgets(line, sizeof(line), file) != NULL) {
             // Check if the line contains relay training data and matches the search date
